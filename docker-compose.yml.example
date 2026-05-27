@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pwd
+      - POSTGRES_DB=study_group
+    ports:
+      - "15432:5432"
+    container_name: postgres
+    networks:
+      - integration
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: study-group-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app/
+      - /app/node_modules
+    networks:
+      - integration
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pwd"
+    ports:
+      - "54321:80"
+    depends_on:
+      - postgres
+    networks:
+      - integration
+
+networks:
+  integration:
+    name: integration
