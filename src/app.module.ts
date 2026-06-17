@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { Database } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
+import { MeetModule } from './meet/meet.module';
 
 @Module({
   imports: [
     Database,
     ConfigModule.forRoot({ isGlobal: true }),
-    GroupModule
+    GroupModule,
+    MeetModule
   ],
   controllers: [AppController],
   providers: [AppService],
