@@ -5,13 +5,15 @@ import { Database } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
 import { MeetModule } from './meet/meet.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
     Database,
     ConfigModule.forRoot({ isGlobal: true }),
     GroupModule,
-    MeetModule
+    MeetModule,
+    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService],
