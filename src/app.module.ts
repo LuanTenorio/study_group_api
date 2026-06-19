@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GroupModule } from './group/group.module';
 import { MeetModule } from './meet/meet.module';
 import { CommentModule } from './comment/comment.module';
+import { NoticeModule } from './notice/notice.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { CommentModule } from './comment/comment.module';
     ConfigModule.forRoot({ isGlobal: true }),
     GroupModule,
     MeetModule,
-    CommentModule
+    CommentModule,
+    NoticeModule
   ],
   controllers: [AppController],
   providers: [AppService],
