@@ -11,5 +11,8 @@ import { MeetRepository } from './meet.repository';
         MeetService, 
         MeetRepository
     ],
+    exports:[
+        MeetService
+    ]
 })
 export class MeetModule {}

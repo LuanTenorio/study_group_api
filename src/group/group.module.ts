@@ -3,9 +3,13 @@ import { GroupController } from './group.controller';
 import { GroupService } from './group.service';
 import { Database } from 'src/database/database.module';
 import { GroupRepository } from './group.repository';
+import { CommentModule } from 'src/comment/comment.module';
+import { MaterialModule } from 'src/material/material.module';
+import { MeetModule } from 'src/meet/meet.module';
+import { NoticeModule } from 'src/notice/notice.module';
 
 @Module({
-    imports: [Database],
+    imports: [Database, CommentModule, MaterialModule, MeetModule, NoticeModule],
     controllers: [GroupController],
     providers: [
         GroupService, 

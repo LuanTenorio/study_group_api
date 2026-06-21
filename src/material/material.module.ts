@@ -11,5 +11,8 @@ import { MaterialRepository } from './material.repository';
         MaterialService, 
         MaterialRepository
     ],
+    exports: [
+        MaterialService
+    ]
 })
 export class MaterialModule {}

@@ -11,5 +11,8 @@ import { NoticeRepository } from './notice.repository';
         NoticeService, 
         NoticeRepository
     ],
+    exports: [
+        NoticeService
+    ]
 })
 export class NoticeModule {}
