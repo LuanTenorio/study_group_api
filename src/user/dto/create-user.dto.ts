@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 export class CreateUserDto {
 
     @IsNotEmpty()
-    institucionId: number
+    institution_id: number
 
 
     @IsString()
@@ -17,9 +17,7 @@ export class CreateUserDto {
 
     @IsString()
     @IsNotEmpty()
-    hashed_password: string
-
-
+    password: string
 
 
 }
