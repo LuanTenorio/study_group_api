@@ -7,13 +7,13 @@ import { UserDto } from "./dto/user.dto";
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
 
-    async findByEmail(email: string) {
+    async findByEmail(email: string): Promise<UserPgDto | undefined> {
         const user = await this.userRepository.findByEmail(email)
 
         if(!user)
               throw new NotFoundException()
 
-        return this.toDto(user)
+        return user
     }
 
     toDto(user: UserPgDto): UserDto {
