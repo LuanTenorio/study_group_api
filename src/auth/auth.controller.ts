@@ -8,7 +8,7 @@ export class AuthController {
         private readonly authService: AuthService
     ) {}
 
-    @Post(":login")
+    @Post("login")
     async login(@Body() {email, password} : LoginDto) {
         return this.authService.login({email, password});
     }
