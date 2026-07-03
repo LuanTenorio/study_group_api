@@ -1,11 +1,5 @@
-import { UserDto } from "src/user/dto/user.dto";
+import { UserDto } from "./user.dto";
 
-export class UserPGDto {
-
-    id: string;
-    name: string;
-    email: string;
-    institution_id: number;
-    hashedpassword: string;
-
+export class UserPgDto extends UserDto {
+    password_hash: string;
 }

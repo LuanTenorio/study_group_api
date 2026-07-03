@@ -8,6 +8,7 @@ import { MeetModule } from './meet/meet.module';
 import { CommentModule } from './comment/comment.module';
 import { NoticeModule } from './notice/notice.module';
 import { MaterialModule } from './material/material.module';
+import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     CommentModule,
     NoticeModule,
     MaterialModule,
+    AuthModule,
     UserModule
   ],
   controllers: [AppController],

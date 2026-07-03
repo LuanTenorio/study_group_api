@@ -115,7 +115,7 @@ INSERT INTO tb_knowledge_area (name) VALUES
 ('Sistemas Operacionais');
 
 INSERT INTO tb_user (institution_id, name, email, password_hash) VALUES
-(1, 'Ana Clara Martins', 'ana.martins@unb.br', '$2b$10$mockhashana'),
+(1, 'Ana Clara Martins', 'ana.martins@unb.br', '$2b$10$4FD1DOdEqKq6uXkMQHUGzuO3Cu2bILxuWAn3leAPfhnK7Kwed8Tga'),
 (1, 'Bruno Ferreira', 'bruno.ferreira@unb.br', '$2b$10$mockhashbruno'),
 (2, 'Carla Souza', 'carla.souza@usp.br', '$2b$10$mockhashcarla'),
 (3, 'Diego Almeida', 'diego.almeida@ufmg.br', '$2b$10$mockhashdiego'),

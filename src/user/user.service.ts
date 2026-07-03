@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './user.repository';
+import { UserPgDto } from "./dto/user_pg.dto";
 import * as bcrypt from 'bcrypt';
+import { UserDto } from './dto/user.dto';
 
 
 @Injectable()
@@ -37,4 +39,22 @@ export class UserService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  async findByEmail(email: string): Promise<UserPgDto | undefined> {
+        const user = await this.userRepository.findByEmail(email)
+
+        if(!user)
+              throw new NotFoundException()
+
+        return user
+    }
+
+    toDto(user: UserPgDto): UserDto {
+        return {
+            id: user.id,
+            institution_id: user.institution_id,
+            name: user.name,
+            email: user.email,
+        };
+    }
 }
