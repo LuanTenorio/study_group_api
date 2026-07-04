@@ -11,4 +11,8 @@ export class InstitutionService {
         return this.institutionRepository.findAll();
     }
     
+    async findById(institution_id: number): Promise<InstitutionDto | undefined> {
+        return this.institutionRepository.findById(institution_id);
+    }
+    
 }

@@ -13,4 +13,10 @@ export class InstitutionRepository {
         return result.rows;
     }
 
+    async findById(institution_id: number): Promise<InstitutionDto | undefined> {
+        const result = await this.pool.query<InstitutionDto>(InstitutionQuery.SELECT_BY_ID, [institution_id])
+
+        return result.rows[0];
+    }
+
 }
