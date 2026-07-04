@@ -1,15 +1,17 @@
-import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UserService } from "src/user/user.service";
 import { LoginDto } from "./dto/login.dto";
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from "./dto/register.dto";
+import { InstitutionService } from "src/institution/institution.service";
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly userService: UserService,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
+        private readonly institutionService: InstitutionService
     ) {}
 
     async login(loginDto: LoginDto) {
@@ -50,6 +52,12 @@ export class AuthService {
 
         if(existingUser) {
             throw new ConflictException('Este e-mail já está cadastrado');
+        }
+
+        const institution = await this.institutionService.findById(registerDto.institution_id);
+
+        if(!institution) {
+            throw new BadRequestException('Essa instituição não está cadastrada!')
         }
 
         const password_hash = await bcrypt.hash(registerDto.password, 10);
