@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { UserRepository } from "./user.repository";
 import { UserPgDto } from "./dto/user_pg.dto";
 import { UserDto } from "./dto/user.dto";
+import { CreateUserPgDto } from "./dto/create_user_pg.dto";
 
 @Injectable()
 export class UserService {
@@ -10,10 +11,13 @@ export class UserService {
     async findByEmail(email: string): Promise<UserPgDto | undefined> {
         const user = await this.userRepository.findByEmail(email)
 
-        if(!user)
-              throw new NotFoundException()
-
         return user
+    }
+
+    async create(data: CreateUserPgDto): Promise<UserDto> {
+        const user = await this.userRepository.create(data)
+
+        return this.toDto(user)
     }
 
     toDto(user: UserPgDto): UserDto {
