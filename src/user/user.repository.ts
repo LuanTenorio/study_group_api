@@ -3,6 +3,8 @@ import { Pool } from 'pg';
 import { UserPgDto } from './dto/user_pg.dto';
 import { UserQuery } from './query.enum';
 import { CreateUserPgDto } from './dto/create_user_pg.dto';
+import { UpdateUserDto } from './dto/update_user.dto';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserRepository {
@@ -14,9 +16,21 @@ export class UserRepository {
         return user.rows[0];
     }
 
+    async findById(userId: number): Promise<UserPgDto | undefined> {
+        const user = await this.pool.query<UserPgDto>(UserQuery.SELECT_BY_ID, [userId])
+
+        return user.rows[0];
+    }
+
     async create(data: CreateUserPgDto): Promise<UserPgDto> {
         const user = await this.pool.query<UserPgDto>(UserQuery.INSERT, [data.institution_id, data.name, data.email, data.password_hash])
         
+        return user.rows[0];
+    }
+
+    async update(userId: number, data: UpdateUserDto): Promise<UserDto | undefined> {
+        const user = await this.pool.query<UserDto>(UserQuery.UPDATE, [data.institution_id, data.name, data.email, userId])
+
         return user.rows[0];
     }
 
