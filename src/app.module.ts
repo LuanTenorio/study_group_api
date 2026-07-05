@@ -10,6 +10,7 @@ import { NoticeModule } from './notice/notice.module';
 import { MaterialModule } from './material/material.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { AreaModule } from './area/area.module';
 import { InstitutionModule } from './institution/institution.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { InstitutionModule } from './institution/institution.module';
     MaterialModule,
     AuthModule,
     UserModule,
+    AreaModule,
     InstitutionModule
   ],
   controllers: [AppController],
