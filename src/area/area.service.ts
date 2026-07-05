@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
+import { AreaRepository } from './area.repository';
 
 @Injectable()
 export class AreaService {
+
+  constructor(private readonly areaRepository: AreaRepository){}
+
   create(createAreaDto: CreateAreaDto) {
     return 'This action adds a new area';
   }
 
   findAll() {
-    return `This action returns all area`;
+    return this.areaRepository.findAll();
   }
 
   findOne(id: number) {
