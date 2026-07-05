@@ -21,7 +21,7 @@ import { UserModule } from './user/user.module';
     NoticeModule,
     MaterialModule,
     AuthModule,
-    UserModule
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
