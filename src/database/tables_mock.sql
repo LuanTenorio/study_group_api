@@ -5,7 +5,7 @@ CREATE TABLE tb_user
  id SERIAL PRIMARY KEY,  
  institution_id INT,  
  name VARCHAR(255),  
- email VARCHAR(255),  
+ email VARCHAR(255) UNIQUE,  
  password_hash VARCHAR(255) 
 ); 
 

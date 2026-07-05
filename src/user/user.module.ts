@@ -3,13 +3,15 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { UserRepository } from './user.repository';
 import { Database } from 'src/database/database.module';
+import { InstitutionModule } from "src/institution/institution.module";
+import { UserController } from "./user.controller";
+
 
 @Module({
-  imports: [Database],
+  controllers: [UserController],
+  imports: [Database, InstitutionModule],
   controllers: [UserController],
   providers: [UserService, UserRepository],
-  exports: [
-          UserService
-      ]
+  exports: [ UserService]
 })
 export class UserModule {}
