@@ -7,6 +7,7 @@ import { MeetService } from 'src/meet/meet.service';
 import { NoticeService } from 'src/notice/notice.service';
 import { GroupPgDto } from './dto/group_pg.dto';
 import { GroupDto } from './dto/group.dto';
+import { GroupCardDto } from './dto/group_card.dto';
 
 @Injectable()
 export class GroupService {
@@ -49,6 +50,44 @@ export class GroupService {
     const [comments, materials, meets, notices] = await this.getAllInformations(group.id)
 
     return {...group, comments, materials, meets, notices}
+  }
+
+
+   async getFeedGroups(): Promise<GroupCardDto[]> {
+    const rawData = await this.groupRepository.findAll();
+
+    // formata cada linha do banco para a interface do front end
+    return rawData.map(row => ({
+      id: row.id,
+      title: row.title,
+      institution: row.institution || 'Geral', // fallback caso não tenha instituição
+      area: row.area || 'Diversos',
+      members: row.members || 0,
+      nextMeeting: this.formatMeetingDate(row.next_meeting)
+    }));
+  }
+  private formatMeetingDate(dateString: string | null): string {
+    if (!dateString) return 'Sem encontros agendados';
+
+    const meetingDate = new Date(dateString);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // formatação para a hora
+    const time = meetingDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    // testa se o encontro é hoje, amanhã ou outro dia da semana
+    if (meetingDate.toDateString() === today.toDateString()) {
+      return `Hoje, ${time}`;
+    } else if (meetingDate.toDateString() === tomorrow.toDateString()) {
+      return `Amanhã, ${time}`;
+    } else {
+      // formatação para a data
+      const dayName = meetingDate.toLocaleDateString('pt-BR', { weekday: 'long' });
+      const dayCapitalized = dayName.charAt(0).toUpperCase() + dayName.slice(1).split('-')[0];
+      return `${dayCapitalized}, ${time}`;
+    }
   }
   
 }

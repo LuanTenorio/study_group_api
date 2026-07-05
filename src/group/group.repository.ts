@@ -30,5 +30,10 @@ export class GroupRepository {
     
     return rowCount != null && rowCount > 0
   }
+
+  async findAll(): Promise<any[]> {
+    const result = await this.pool.query(GroupQuery.FIND_ALL);
+    return result.rows; 
+  }
   
 }

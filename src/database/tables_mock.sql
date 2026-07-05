@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS tb_group_area, tb_comment, tb_notice, tb_material, tb_enrollment, tb_meeting, tb_group, tb_user, tb_institution, tb_knowledge_area;
+DROP TABLE IF EXISTS tb_group_area, tb_comment, tb_notice, tb_material, tb_enrollment, tb_meeting, tb_group, tb_user, tb_institution, tb_knowledge_area; 
 
 CREATE TABLE tb_user 
 ( 
