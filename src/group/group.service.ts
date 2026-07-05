@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GroupRepository } from './group.repository';
-import { CommentRepository } from 'src/comment/comment.repository';
 import { CommentService } from 'src/comment/comment.service';
 import { MaterialService } from 'src/material/material.service';
 import { MeetService } from 'src/meet/meet.service';
@@ -8,6 +7,7 @@ import { NoticeService } from 'src/notice/notice.service';
 import { GroupPgDto } from './dto/group_pg.dto';
 import { GroupDto } from './dto/group.dto';
 import { GroupCardDto } from './dto/group_card.dto';
+import { CreateGroupDto } from './dto/create_group.dto';
 
 @Injectable()
 export class GroupService {
@@ -52,6 +52,9 @@ export class GroupService {
     return {...group, comments, materials, meets, notices}
   }
 
+  async create(userId: number, dto: CreateGroupDto){
+    return this.groupRepository.create(userId, dto);
+  }
 
    async getFeedGroups(): Promise<GroupCardDto[]> {
     const rawData = await this.groupRepository.findAll();

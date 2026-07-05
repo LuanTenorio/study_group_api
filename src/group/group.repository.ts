@@ -1,7 +1,8 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Pool } from 'pg';
+import { ConflictException, Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { DatabaseError, Pool } from 'pg';
 import { GroupQuery } from './query.enum';
 import { GroupPgDto } from './dto/group_pg.dto';
+import { CreateGroupDto } from './dto/create_group.dto';
 
 @Injectable()
 export class GroupRepository {
@@ -20,9 +21,16 @@ export class GroupRepository {
     return rowCount != null && rowCount > 0
   }
 
-  async create(name: string){
-    const group = await this.pool.query<GroupPgDto>(GroupQuery.CREATE, [name])
-    return group.rows[0]
+  async create(userId: number, {name, areaId}: CreateGroupDto){
+    try{
+      const group = await this.pool.query<GroupPgDto>(GroupQuery.CREATE, [name, areaId, userId])
+      return group.rows[0]
+    }catch (error){
+      if(error instanceof DatabaseError && error.code === "23505")
+        throw new ConflictException("A group with that name already exists")
+      
+      throw new InternalServerErrorException()
+    }
   }
 
   async delete(id: number){
