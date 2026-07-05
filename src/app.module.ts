@@ -11,6 +11,7 @@ import { MaterialModule } from './material/material.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AreaModule } from './area/area.module';
+import { InstitutionModule } from './institution/institution.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AreaModule } from './area/area.module';
     AuthModule,
     UserModule,
     AreaModule,
+    InstitutionModule
   ],
   controllers: [AppController],
   providers: [AppService],
