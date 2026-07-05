@@ -10,6 +10,7 @@ import { InstitutionModule } from "src/institution/institution.module";
     imports: [
         UserModule,
         JwtModule.registerAsync({
+            global: true,
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => ({
