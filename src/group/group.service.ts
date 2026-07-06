@@ -9,6 +9,7 @@ import { GroupDto } from './dto/group.dto';
 import { GroupCardDto } from './dto/group_card.dto';
 import { CreateGroupDto } from './dto/create_group.dto';
 import { AreaService } from 'src/area/area.service';
+import { UpdateGroupDto } from './dto/update_group.dto';
 
 @Injectable()
 export class GroupService {
@@ -57,18 +58,6 @@ export class GroupService {
     return this.groupRepository.delete(groupId)
   }
 
-  async patch(id: number, name: string, userId: number){
-    const isOwner = await this.isOwner(id, userId)
-
-    if(!isOwner)
-      throw new UnauthorizedException("Only administrators can patch")
-
-    const isUpdated = await this.groupRepository.patch(id, name);
-    
-    if(!isUpdated)
-      throw new NotFoundException()
-  }
-
   async getAllInformations(id: number){
     return Promise.all([
       this.commentService.findByGroupId(id),
@@ -102,6 +91,7 @@ export class GroupService {
       nextMeeting: this.formatMeetingDate(row.next_meeting)
     }));
   }
+
   private formatMeetingDate(dateString: string | null): string {
     if (!dateString) return 'Sem encontros agendados';
 
@@ -124,6 +114,15 @@ export class GroupService {
       const dayCapitalized = dayName.charAt(0).toUpperCase() + dayName.slice(1).split('-')[0];
       return `${dayCapitalized}, ${time}`;
     }
+  }
+
+  async update(groupId: number, userId: number, dto: UpdateGroupDto){
+    const isOwner = await this.isOwner(groupId, userId)
+
+    if(!isOwner)
+      throw new UnauthorizedException("Only administrators can patch")
+
+    return await this.groupRepository.update(groupId, dto);
   }
   
 }

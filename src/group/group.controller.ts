@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { GroupService } from './group.service';
-import { PatchGroupDto } from './dto/patch.dto';
 import { GroupCardDto } from './dto/group_card.dto';
 import { UserId } from 'src/auth/param/userId.param';
 import { CreateGroupDto } from './dto/create_group.dto';
+import { UpdateGroupDto } from './dto/update_group.dto';
 
 @Controller("group")
 export class GroupController {
@@ -25,15 +25,13 @@ export class GroupController {
   }
 
   @Patch(":id")
-  async patch(@Param("id", ParseIntPipe) id: number, @UserId() userId: number, @Body() {name}: PatchGroupDto){
-    return this.groupService.patch(id, name, userId);
+  async patch(@Param("id", ParseIntPipe) groupId: number, @UserId() userId: number, @Body() body: UpdateGroupDto){
+    return this.groupService.update(groupId, userId, body);
   }
 
   @Delete(":id")
   async delete(@Param("id", ParseIntPipe) id: number, @UserId() userId: number){
     return this.groupService.delete(id, userId);
   }
-
- 
 
 }
