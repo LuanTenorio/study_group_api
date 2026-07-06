@@ -9,4 +9,5 @@ export class GroupDto extends GroupPgDto {
     notices: NoticeDto[]
     meets: MeetDto[]
     materials: MaterialDto[]
+    role: string
 }

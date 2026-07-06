@@ -27,10 +27,12 @@ export class GroupService {
     if(!group)
       throw new NotFoundException()
 
-    if(!(await this.isUserRegistered(id, userId)))
+    const role = await this.groupRepository.getUserRole(id, userId)
+
+    if(!role)
       throw new UnauthorizedException("User is not subscribed to the group")
 
-    return this.formatGroup(group)
+    return this.formatGroup(group, role)
   }
 
   async isUserRegistered(groupId: number, userId: number){
@@ -75,10 +77,10 @@ export class GroupService {
     ])
   }
 
-  async formatGroup(group: GroupPgDto): Promise<GroupDto>{
+  async formatGroup(group: GroupPgDto, role: string): Promise<GroupDto>{
     const [comments, materials, meets, notices] = await this.getAllInformations(group.id)
 
-    return {...group, comments, materials, meets, notices}
+    return {...group, comments, materials, meets, notices, role}
   }
 
   async create(userId: number, dto: CreateGroupDto){
