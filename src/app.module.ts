@@ -12,6 +12,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AreaModule } from './area/area.module';
 import { InstitutionModule } from './institution/institution.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/guard/auth.guard';
 
 @Module({
   imports: [
@@ -28,6 +30,12 @@ import { InstitutionModule } from './institution/institution.module';
     InstitutionModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    }
+  ],
 })
 export class AppModule {}
