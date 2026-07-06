@@ -26,14 +26,15 @@ export class GroupRepository {
     return queryResult.rows[0]?.role
   }
 
-  async create(userId: number, {name, areaId}: CreateGroupDto){
+  async create(userId: number, {name, areas}: CreateGroupDto){
     try{
-      const group = await this.pool.query<GroupPgDto>(GroupQuery.CREATE, [name, areaId, userId])
+      const group = await this.pool.query<GroupPgDto>(GroupQuery.CREATE, [name, areas, userId])
       return group.rows[0]
     }catch (error){
       if(error instanceof DatabaseError && error.code === "23505")
         throw new ConflictException("A group with that name already exists")
       
+      console.log(error)
       throw new InternalServerErrorException()
     }
   }

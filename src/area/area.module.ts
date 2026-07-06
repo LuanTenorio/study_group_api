@@ -8,5 +8,6 @@ import { Database } from 'src/database/database.module';
   imports: [Database],
   controllers: [AreaController],
   providers: [AreaService, AreaRepository],
+  exports: [AreaService]
 })
 export class AreaModule {}

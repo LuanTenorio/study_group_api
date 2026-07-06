@@ -16,6 +16,10 @@ export class AreaService {
     return this.areaRepository.findAll();
   }
 
+  findAreasByGroup(groupId: number){
+    return this.areaRepository.findAreasByGroup(groupId)
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} area`;
   }

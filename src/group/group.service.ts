@@ -8,6 +8,7 @@ import { GroupPgDto } from './dto/group_pg.dto';
 import { GroupDto } from './dto/group.dto';
 import { GroupCardDto } from './dto/group_card.dto';
 import { CreateGroupDto } from './dto/create_group.dto';
+import { AreaService } from 'src/area/area.service';
 
 @Injectable()
 export class GroupService {
@@ -18,7 +19,7 @@ export class GroupService {
     private readonly materialService: MaterialService,
     private readonly meetService: MeetService,
     private readonly noticeService: NoticeService,
-
+    private readonly areaService: AreaService
   ) {}
 
   async findById(id: number, userId: number){
@@ -73,14 +74,15 @@ export class GroupService {
       this.commentService.findByGroupId(id),
       this.materialService.findByGroupId(id),
       this.meetService.findByGroupId(id),
-      this.noticeService.findByGroupId(id)
+      this.noticeService.findByGroupId(id),
+      this.areaService.findAreasByGroup(id)
     ])
   }
 
   async formatGroup(group: GroupPgDto, role: string): Promise<GroupDto>{
-    const [comments, materials, meets, notices] = await this.getAllInformations(group.id)
+    const [comments, materials, meets, notices, areas] = await this.getAllInformations(group.id)
 
-    return {...group, comments, materials, meets, notices, role}
+    return {...group, comments, materials, meets, notices, role, areas}
   }
 
   async create(userId: number, dto: CreateGroupDto){
