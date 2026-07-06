@@ -22,6 +22,10 @@ import { readFileSync } from "node:fs";
         await pool.query(tablesQuery)
         console.log("Criando as tabelas...")
 
+        console.log("Lendo o script da trigger...")
+        const triggerQuery = readFileSync(`${__dirname}/scripts/trigger.sql`, "utf8")
+        await pool.query(triggerQuery)
+        console.log("Criando a trigger...")
 
         console.log("Lendo o script da procedure...")
         const procedureQuery = readFileSync(`${__dirname}/scripts/procedure.sql`, "utf8")
