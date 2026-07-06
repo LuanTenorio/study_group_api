@@ -21,6 +21,11 @@ export class GroupRepository {
     return rowCount != null && rowCount > 0
   }
 
+  async getUserRole(groupId: number, userId: number): Promise<string | undefined>{
+    const queryResult = await this.pool.query<{role: string}>(GroupQuery.CHECK_IF_OWNER, [groupId, userId])
+    return queryResult.rows[0]?.role
+  }
+
   async create(userId: number, {name, areaId}: CreateGroupDto){
     try{
       const group = await this.pool.query<GroupPgDto>(GroupQuery.CREATE, [name, areaId, userId])

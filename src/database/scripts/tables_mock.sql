@@ -88,15 +88,17 @@ CREATE TABLE tb_group_area
 ); 
 
 ALTER TABLE tb_user ADD FOREIGN KEY(institution_id) REFERENCES tb_institution (id);
-ALTER TABLE tb_meeting ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
 ALTER TABLE tb_enrollment ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
-ALTER TABLE tb_enrollment ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
 ALTER TABLE tb_material ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
-ALTER TABLE tb_material ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
 ALTER TABLE tb_notice ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
-ALTER TABLE tb_notice ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
 ALTER TABLE tb_comment ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
-ALTER TABLE tb_comment ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
-ALTER TABLE tb_group_area ADD FOREIGN KEY(group_id) REFERENCES tb_group (id);
 ALTER TABLE tb_group_area ADD FOREIGN KEY(area_id) REFERENCES tb_knowledge_area (id);
+
+ALTER TABLE tb_meeting ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+ALTER TABLE tb_enrollment ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+ALTER TABLE tb_material ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+ALTER TABLE tb_notice ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+ALTER TABLE tb_comment ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+ALTER TABLE tb_group_area ADD FOREIGN KEY(group_id) REFERENCES tb_group (id) ON DELETE CASCADE;
+
 ALTER TABLE tb_group ADD CONSTRAINT uk_group_name UNIQUE (name);

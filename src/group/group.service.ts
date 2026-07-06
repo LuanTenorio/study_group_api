@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { GroupRepository } from './group.repository';
 import { CommentService } from 'src/comment/comment.service';
 import { MaterialService } from 'src/material/material.service';
@@ -21,16 +21,45 @@ export class GroupService {
 
   ) {}
 
-  async findById(id: number){
+  async findById(id: number, userId: number){
     const group = await this.groupRepository.findById(id)
     
     if(!group)
       throw new NotFoundException()
 
+    if(!(await this.isUserRegistered(id, userId)))
+      throw new UnauthorizedException("User is not subscribed to the group")
+
     return this.formatGroup(group)
   }
 
-  async patch(id: number, name: string){
+  async isUserRegistered(groupId: number, userId: number){
+    const role = await this.groupRepository.getUserRole(groupId, userId)
+
+    return !!role
+  }
+
+  async isOwner(groupId: number, userId: number){
+    const role = await this.groupRepository.getUserRole(groupId, userId)
+
+    return role === "owner"
+  }
+
+  async delete(groupId: number, userId: number){
+    const isOwner = await this.isOwner(groupId, userId)
+
+    if(!isOwner)
+      throw new UnauthorizedException("Only administrators can delete")
+
+    return this.groupRepository.delete(groupId)
+  }
+
+  async patch(id: number, name: string, userId: number){
+    const isOwner = await this.isOwner(id, userId)
+
+    if(!isOwner)
+      throw new UnauthorizedException("Only administrators can patch")
+
     const isUpdated = await this.groupRepository.patch(id, name);
     
     if(!isUpdated)
