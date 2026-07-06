@@ -3,6 +3,7 @@ import { DatabaseError, Pool } from 'pg';
 import { GroupQuery } from './query.enum';
 import { GroupPgDto } from './dto/group_pg.dto';
 import { CreateGroupDto } from './dto/create_group.dto';
+import { UpdateGroupDto } from './dto/update_group.dto';
 
 @Injectable()
 export class GroupRepository {
@@ -13,12 +14,6 @@ export class GroupRepository {
     const group = await this.pool.query<GroupPgDto>(GroupQuery.SELECT_BY_ID, [id])
 
     return group.rows[0]
-  }
-
-  async patch(id: number, name: string){
-    const {rowCount} = await this.pool.query<GroupPgDto>(GroupQuery.UPDATE, [id, name])
-
-    return rowCount != null && rowCount > 0
   }
 
   async getUserRole(groupId: number, userId: number): Promise<string | undefined>{
@@ -50,4 +45,13 @@ export class GroupRepository {
     return result.rows; 
   }
   
+  async update(groupId: number, dto: UpdateGroupDto){
+    try{
+      return await this.pool.query(GroupQuery.UPDATE, [groupId, dto.name, dto.areas])
+    } catch(error){
+      console.log(error)
+      throw new InternalServerErrorException()
+    }
+  }
+
 }

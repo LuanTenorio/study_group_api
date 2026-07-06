@@ -1,5 +1,6 @@
 DROP PROCEDURE IF EXISTS create_group_study(VARCHAR, INT, INT);
 DROP PROCEDURE IF EXISTS create_group_study(VARCHAR, INT[], INT);
+DROP PROCEDURE IF EXISTS update_group_areas(p_group_id INT, p_areas_id INT[]);
 
 CREATE OR REPLACE PROCEDURE create_group_study(
     p_nome_grupo VARCHAR,
@@ -33,6 +34,30 @@ BEGIN
         NOW(), 
         'Olá, Seja bem vindo ao grupo de estudos de ' || p_nome_grupo 
     );
+    COMMIT;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_group_areas(
+    p_group_id INT,
+    p_nome_grupo VARCHAR,
+    p_areas_id INT[]
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE tb_group 
+    SET name = p_nome_grupo 
+    WHERE id = p_group_id;
+
+    DELETE FROM tb_group_area 
+    WHERE group_id = p_group_id 
+      AND area_id != ALL(p_areas_id);
+
+    INSERT INTO tb_group_area (group_id, area_id) 
+    SELECT p_group_id, unnest(p_areas_id)
+    ON CONFLICT (group_id, area_id) DO NOTHING;
+
     COMMIT;
 END;
 $$;
