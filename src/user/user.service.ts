@@ -12,15 +12,15 @@ export class UserService {
     constructor(private readonly userRepository: UserRepository, private readonly institutionService: InstitutionService) {}
  
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+    findOne(id: number) {
+        return `This action returns a #${id} user`;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+    remove(id: number) {
+        return `This action removes a #${id} user`;
+    }
 
-  async findByEmail(email: string): Promise<UserPgDto | undefined> {
+    async findByEmail(email: string): Promise<UserPgDto | undefined> {
         const user = await this.userRepository.findByEmail(email)
 
         return user
@@ -52,6 +52,26 @@ export class UserService {
                 }
             }
             throw error
+        }
+    }
+
+    async deleteById(userId: number): Promise<void> {
+        try {
+            const deleted = await this.userRepository.delete(userId);
+
+            if(!deleted) {
+                throw new NotFoundException('Usuário não encontrado!');
+            }
+
+        } catch (error) {
+            
+            if(error instanceof DatabaseError) {
+                if(error.code == 'P0001') {
+                    throw new ConflictException('Não é possível excluir um usuário dono de grupo!');
+                }
+            }
+
+            throw error;
         }
     }
 
