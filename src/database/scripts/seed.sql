@@ -10,7 +10,9 @@ INSERT INTO tb_knowledge_area (name, icon) VALUES
 ('Engenharia de Software', 'pi-code'),
 ('Redes de Computadores', 'pi-sitemap'),
 ('Matematica Discreta', 'pi-calculator'),
-('Sistemas Operacionais', 'pi-desktop');
+('Sistemas Operacionais', 'pi-desktop'),
+('Segurança da Informação', 'pi-shield'),
+('Ciência de Dados', 'pi-chart-line');
 
 INSERT INTO tb_user (institution_id, name, email, password_hash) VALUES
 (1, 'Ana Clara Martins', 'ana.martins@unb.br', '$2b$10$4FD1DOdEqKq6uXkMQHUGzuO3Cu2bILxuWAn3leAPfhnK7Kwed8Tga'),
