@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { AreaService } from './area.service';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
+import { PublicRouter } from 'src/auth/metadata/public.metadata';
 
 @Controller('area')
 export class AreaController {
@@ -12,7 +13,7 @@ export class AreaController {
     return this.areaService.create(createAreaDto);
   }
 
-
+  @PublicRouter()
   @Get()
   async findAll() {
     return this.areaService.findAll();
