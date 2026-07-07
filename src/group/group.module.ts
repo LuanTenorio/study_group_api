@@ -7,9 +7,10 @@ import { CommentModule } from 'src/comment/comment.module';
 import { MaterialModule } from 'src/material/material.module';
 import { MeetModule } from 'src/meet/meet.module';
 import { NoticeModule } from 'src/notice/notice.module';
+import { AreaModule } from 'src/area/area.module';
 
 @Module({
-    imports: [Database, CommentModule, MaterialModule, MeetModule, NoticeModule],
+    imports: [Database, CommentModule, MaterialModule, MeetModule, NoticeModule, AreaModule],
     controllers: [GroupController],
     providers: [
         GroupService, 

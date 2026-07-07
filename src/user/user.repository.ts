@@ -36,4 +36,10 @@ export class UserRepository {
         return user.rows[0];
     }
 
+    async delete(userId: number): Promise<boolean> {
+        const result = await this.pool.query(UserQuery.DELETE, [userId]);
+
+        return result.rowCount !== null && result.rowCount > 0;
+    }
+    
 }

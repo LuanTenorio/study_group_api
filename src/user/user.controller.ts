@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, HttpCode, HttpStatus } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserPgDto } from './dto/create_user_pg.dto';
 import { UpdateUserDto } from './dto/update_user.dto';
 import { UserDto } from "./dto/user.dto";
+import { UserId } from 'src/auth/param/userId.param';
 
 @Controller('user')
 export class UserController {
@@ -19,9 +20,10 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Delete('me')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteMe(@UserId() userId: number): Promise<void> {
+    return this.userService.deleteById(userId);
   }
   
   @Put(':id')
