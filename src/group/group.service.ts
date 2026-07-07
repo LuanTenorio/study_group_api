@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { GroupRepository } from './group.repository';
 import { CommentService } from 'src/comment/comment.service';
 import { MaterialService } from 'src/material/material.service';
@@ -10,6 +10,7 @@ import { GroupCardDto } from './dto/group_card.dto';
 import { CreateGroupDto } from './dto/create_group.dto';
 import { AreaService } from 'src/area/area.service';
 import { UpdateGroupDto } from './dto/update_group.dto';
+import { GroupPreviewDto } from './dto/preview_group.dto';
 
 @Injectable()
 export class GroupService {
@@ -92,6 +93,35 @@ export class GroupService {
     }));
   }
 
+  async getPreview(id: number): Promise<GroupPreviewDto> {
+    const row = await this.groupRepository.findPreviewById(id);
+ 
+    if (!row)
+      throw new NotFoundException('Grupo não encontrado');
+ 
+    return {
+      id: row.id,
+      name: row.title,
+      institution: row.institution || 'Geral',
+      area: row.area || 'Diversos',
+      members: row.members || 0
+    };
+  }
+
+  async enroll(userId: number, groupId: number): Promise<void> {
+    try {
+      await this.groupRepository.enroll(userId, groupId);
+    } catch (error: any) {
+      if (error.code === 'P0003') {
+        throw new ConflictException('Você já está inscrito nesse grupo');
+      }
+      if (error.code === 'P0002') {
+        throw new NotFoundException('Grupo não encontrado');
+      }
+      throw error;
+    }
+  }
+
   private formatMeetingDate(dateString: string | null): string {
     if (!dateString) return 'Sem encontros agendados';
 
@@ -128,14 +158,13 @@ export class GroupService {
   async getMyGroups(userId: number): Promise<GroupCardDto[]> {
     const rawData = await this.groupRepository.findMyGroups(userId);
 
-    // Formata cada linha do banco para a DTO do frontend
     return rawData.map(row => ({
       id: row.id,
       title: row.title,
       institution: row.institution || 'Geral',
       area: row.area || 'Diversos',
       members: row.members || 0,
-      nextMeeting: this.formatMeetingDate(row.next_meeting) // Reutilizamos a sua função!
+      nextMeeting: this.formatMeetingDate(row.next_meeting) 
     }));
   }
   

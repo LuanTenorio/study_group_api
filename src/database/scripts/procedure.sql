@@ -61,3 +61,35 @@ BEGIN
     COMMIT;
 END;
 $$;
+DROP PROCEDURE IF EXISTS enroll_user_group(INT, INT);
+
+CREATE OR REPLACE PROCEDURE enroll_user_group(
+    p_user_id INT,
+    p_group_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM tb_group WHERE id = p_group_id) THEN
+        RAISE EXCEPTION USING
+            ERRCODE = 'P0002',
+            MESSAGE = 'Grupo não encontrado.',
+            DETAIL = 'Não existe grupo de estudos com o id informado.';
+    END IF;
+
+    IF EXISTS (
+        SELECT 1 FROM tb_enrollment
+        WHERE user_id = p_user_id AND group_id = p_group_id
+    ) THEN
+        RAISE EXCEPTION USING
+            ERRCODE = 'P0003',
+            MESSAGE = 'Usuário já está inscrito nesse grupo.',
+            DETAIL = 'Não é possível se inscrever duas vezes no mesmo grupo de estudos.';
+    END IF;
+
+    INSERT INTO tb_enrollment (user_id, group_id, status, role, enrolled_at)
+    VALUES (p_user_id, p_group_id, 'active', 'member', NOW());
+
+    COMMIT;
+END;
+$$;

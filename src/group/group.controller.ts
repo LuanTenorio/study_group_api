@@ -38,4 +38,18 @@ export class GroupController {
     return this.groupService.getMyGroups(Number(userId));
   }
 
+  @Get(':id/preview')
+  async getPreview(@Param('id', ParseIntPipe) id: number) {
+    return this.groupService.getPreview(id);
+  }
+
+  @Post(':id/enroll')
+  async enroll(
+    @Param('id', ParseIntPipe) groupId: number,
+    @UserId() userId: number 
+  ) {
+    await this.groupService.enroll(userId, groupId);
+    return { success: true };
+  }
+
 }

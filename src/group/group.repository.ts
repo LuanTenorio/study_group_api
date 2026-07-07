@@ -59,4 +59,13 @@ export class GroupRepository {
     }
   }
 
+    async findPreviewById(id: number): Promise<any | undefined> {
+    const result = await this.pool.query(GroupQuery.FIND_PREVIEW_BY_ID, [id]);
+    return result.rows[0];
+  }
+
+   async enroll(userId: number, groupId: number): Promise<void> {
+    await this.pool.query(GroupQuery.ENROLL, [userId, groupId]);
+  }
+
 }
