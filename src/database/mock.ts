@@ -32,6 +32,11 @@ import { readFileSync } from "node:fs";
         await pool.query(procedureQuery)
         console.log("criando a procedure...")
 
+        console.log("Lendo o script da view")
+        const viewQuery = readFileSync(`${__dirname}/scripts/view.sql`, "utf8")
+        await pool.query(viewQuery)
+        console.log("criando view...")
+
         console.log("Lendo o script da seed")
         const seedQuery = readFileSync(`${__dirname}/scripts/seed.sql`, "utf8")
         await pool.query(seedQuery)

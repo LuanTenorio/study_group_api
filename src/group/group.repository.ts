@@ -44,6 +44,11 @@ export class GroupRepository {
     const result = await this.pool.query(GroupQuery.FIND_ALL);
     return result.rows; 
   }
+
+  async findMyGroups(userId: number): Promise<any[]> {
+    const result = await this.pool.query(GroupQuery.FIND_MY_GROUPS, [userId]);
+    return result.rows;
+  }
   
   async update(groupId: number, dto: UpdateGroupDto){
     try{
@@ -52,6 +57,15 @@ export class GroupRepository {
       console.log(error)
       throw new InternalServerErrorException()
     }
+  }
+
+    async findPreviewById(id: number): Promise<any | undefined> {
+    const result = await this.pool.query(GroupQuery.FIND_PREVIEW_BY_ID, [id]);
+    return result.rows[0];
+  }
+
+   async enroll(userId: number, groupId: number): Promise<void> {
+    await this.pool.query(GroupQuery.ENROLL, [userId, groupId]);
   }
 
 }

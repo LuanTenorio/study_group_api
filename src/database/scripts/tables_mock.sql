@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS group_feed_card;
 DROP TABLE IF EXISTS tb_group_area, tb_comment, tb_notice, tb_material, tb_enrollment, tb_meeting, tb_group, tb_user, tb_institution, tb_knowledge_area; 
 
 CREATE TABLE tb_user 
@@ -46,7 +47,8 @@ CREATE TABLE tb_institution
 CREATE TABLE tb_knowledge_area 
 ( 
  id SERIAL PRIMARY KEY,  
- name VARCHAR(255) 
+ name VARCHAR(255),
+ icon VARCHAR(50) DEFAULT 'pi-book'
 ); 
 
 CREATE TABLE tb_material 

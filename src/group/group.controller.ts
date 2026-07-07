@@ -33,5 +33,23 @@ export class GroupController {
   async delete(@Param("id", ParseIntPipe) id: number, @UserId() userId: number){
     return this.groupService.delete(id, userId);
   }
+  @Get('my-groups/:userId')
+  async getMyGroups(@Param('userId') userId: string): Promise<GroupCardDto[]> {
+    return this.groupService.getMyGroups(Number(userId));
+  }
+
+  @Get(':id/preview')
+  async getPreview(@Param('id', ParseIntPipe) id: number) {
+    return this.groupService.getPreview(id);
+  }
+
+  @Post(':id/enroll')
+  async enroll(
+    @Param('id', ParseIntPipe) groupId: number,
+    @UserId() userId: number 
+  ) {
+    await this.groupService.enroll(userId, groupId);
+    return { success: true };
+  }
 
 }
