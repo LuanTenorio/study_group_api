@@ -15,7 +15,7 @@ export class NoticeController {
     return this.serviceService.findByGroupId(id)
   }
 
-  @Delete(":id/group/:group_id")
+  @Delete(":id/group/:group_id/notice/delete")
   async deleteNotice(@Param("id", ParseIntPipe) id: number, @Param("group_id", ParseIntPipe) group_id: number){
     return this.serviceService.deleteNotice(id, group_id)
   }
