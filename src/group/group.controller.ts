@@ -24,7 +24,6 @@ export class GroupController {
 
   @Get('my-groups/:userId')
   async getMyGroups(@Param('userId') userId: string): Promise<GroupCardDto[]> {
-    // Converte a string da URL para Número e passa para o Service
     return this.groupService.getMyGroups(Number(userId));
   }
 
