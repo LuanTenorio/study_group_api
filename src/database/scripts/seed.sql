@@ -4,7 +4,7 @@ INSERT INTO tb_institution (name, state, acronym) VALUES
 ('Universidade Federal de Minas Gerais', 'MG', 'UFMG'),
 ('Universidade Federal do Rio de Janeiro', 'RJ', 'UFRJ');
 
-INSERT INTO tb_knowledge_area (name) VALUES
+INSERT INTO tb_knowledge_area (name, icon) VALUES
 ('Banco de Dados', 'pi-database'),
 ('Inteligencia Artificial', 'pi-bolt'),
 ('Engenharia de Software', 'pi-code'),
