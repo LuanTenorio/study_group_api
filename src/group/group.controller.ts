@@ -4,11 +4,14 @@ import { GroupCardDto } from './dto/group_card.dto';
 import { UserId } from 'src/auth/param/userId.param';
 import { CreateGroupDto } from './dto/create_group.dto';
 import { UpdateGroupDto } from './dto/update_group.dto';
+import { PublicRouter } from 'src/auth/metadata/public.metadata';
 
 @Controller("group")
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
+
+  @PublicRouter()
   @Get("/all")
   async getFeed(): Promise<GroupCardDto[]> {
     return this.groupService.getFeedGroups();
