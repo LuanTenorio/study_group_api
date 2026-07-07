@@ -46,7 +46,8 @@ CREATE TABLE tb_institution
 CREATE TABLE tb_knowledge_area 
 ( 
  id SERIAL PRIMARY KEY,  
- name VARCHAR(255) 
+ name VARCHAR(255),
+ icon VARCHAR(50) DEFAULT 'pi-book'
 ); 
 
 CREATE TABLE tb_material 
