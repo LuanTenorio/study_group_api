@@ -89,5 +89,19 @@ export class GroupService {
       return `${dayCapitalized}, ${time}`;
     }
   }
+
+  async getMyGroups(userId: number): Promise<GroupCardDto[]> {
+    const rawData = await this.groupRepository.findMyGroups(userId);
+
+    // Formata cada linha do banco para a DTO do frontend
+    return rawData.map(row => ({
+      id: row.id,
+      title: row.title,
+      institution: row.institution || 'Geral',
+      area: row.area || 'Diversos',
+      members: row.members || 0,
+      nextMeeting: this.formatMeetingDate(row.next_meeting) // Reutilizamos a sua função!
+    }));
+  }
   
 }

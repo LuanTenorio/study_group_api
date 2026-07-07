@@ -35,5 +35,11 @@ export class GroupRepository {
     const result = await this.pool.query(GroupQuery.FIND_ALL);
     return result.rows; 
   }
+
+  async findMyGroups(userId: number): Promise<any[]> {
+    // Atenção ao [userId] que substitui o $1 na query SQL
+    const result = await this.pool.query(GroupQuery.FIND_MY_GROUPS, [userId]);
+    return result.rows;
+  }
   
 }
