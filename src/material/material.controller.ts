@@ -29,7 +29,7 @@ export class MaterialController {
     @UploadedFile() file: any,
     @Body() body: any,
   ) {
-    return this.serviceService.updateMaterial(id, body.description, file,
+    return this.serviceService.updateMaterial(id, body.title, body.description, file,
     );
   }
 
@@ -39,7 +39,7 @@ export class MaterialController {
     @UploadedFile() file: any,
     @Body() body: any,
   ) {
-    return this.serviceService.createMaterial(Number(body.user_id), Number(body.group_id), file,
+    return this.serviceService.createMaterial(body.title, Number(body.user_id), Number(body.group_id), file,
       body.description,
     );
   }

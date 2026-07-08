@@ -21,6 +21,7 @@ CREATE TABLE tb_meeting
  id SERIAL PRIMARY KEY,  
  user_id INT,
  group_id INT,  
+ title VARCHAR(100),
  date_time TIMESTAMP,  
  description VARCHAR(255),  
  location VARCHAR(255) 
@@ -53,6 +54,7 @@ CREATE TABLE tb_knowledge_area
 CREATE TABLE tb_material 
 ( 
  id SERIAL PRIMARY KEY,  
+ title VARCHAR(100),
  user_id INT,  
  group_id INT,  
  file_size INT,  
@@ -67,6 +69,7 @@ CREATE TABLE tb_notice
  id SERIAL PRIMARY KEY,  
  user_id INT,  
  group_id INT,  
+ title VARCHAR(100),
  expiration_date TIMESTAMP,  
  created_at TIMESTAMP,  
  description VARCHAR(255) 

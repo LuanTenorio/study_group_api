@@ -22,12 +22,12 @@ export class NoticeController {
 
   @Post()
   async createNotice(@Body() data: any){
-    return this.serviceService.createNotice(data.user_id, data.group_id, data.description, data.expiration_date)
+    return this.serviceService.createNotice(data.title, data.user_id, data.group_id, data.description, data.expiration_date)
   }
 
   @Patch(":id")
   async updateNotice(@Param("id", ParseIntPipe) id: number, @Body() data: any){
-    return this.serviceService.updateNotice(id, data.description, data.expiration_date)
+    return this.serviceService.updateNotice(data.title, id, data.description, data.expiration_date)
   }
 
 }

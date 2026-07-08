@@ -19,13 +19,13 @@ export class MaterialRepository {
       return material.rows[0]
   }
 
-  async createMaterial(user_id: number, group_id: number, description: string, file_content: Buffer,file_size: number,  file_type: string) {
-    const material = await this.pool.query<MaterialPGDto>(MaterialQuery.CREATE, [user_id, group_id, file_size, file_content, file_type, description])
+  async createMaterial(title: string, user_id: number, group_id: number, description: string, file_content: Buffer,file_size: number,  file_type: string) {
+    const material = await this.pool.query<MaterialPGDto>(MaterialQuery.CREATE, [title, user_id, group_id, file_size, file_content, file_type, description])
     return material.rows[0]
   }
 
-  async updateMaterial(file_size: number, file_content: Buffer, file_type: string, description: string, id: number) {
-    const material = await this.pool.query<MaterialPGDto>(MaterialQuery.UPDATE, [file_size, file_content, file_type, description, id])
+  async updateMaterial(title: string, file_size: number, file_content: Buffer, file_type: string, description: string, id: number) {
+    const material = await this.pool.query<MaterialPGDto>(MaterialQuery.UPDATE, [title, file_size, file_content, file_type, description, id])
     return material.rows[0]
   }
 

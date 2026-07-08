@@ -2,6 +2,7 @@ import { UserDto } from "src/user/dto/user.dto";
 
 export class NoticeDto {
     id: number
+    title: string
     user_id: number
     group_id: number
     created_at: Date

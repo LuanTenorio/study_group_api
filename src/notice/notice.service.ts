@@ -19,13 +19,13 @@ export class NoticeService {
     return this.formatNotice(notice)
   }
 
-  async createNotice(user_id: number, group_id: number, description: string, expiration_date: Date){
-    const notice = await this.noticeRepository.createNotice(user_id, group_id, description, expiration_date)
+  async createNotice(title:string, user_id: number, group_id: number, description: string, expiration_date: Date){
+    const notice = await this.noticeRepository.createNotice(title, user_id, group_id, description, expiration_date)
     return this.formatNotice(notice)
   }
 
-  async updateNotice(id: number, description: string, expiration_date: Date){
-    const notice = await this.noticeRepository.updateNotice(id, description, expiration_date)
+  async updateNotice(title: string, id: number, description: string, expiration_date: Date){
+    const notice = await this.noticeRepository.updateNotice(title, id, description, expiration_date)
     return this.formatNotice(notice)
   }
 
@@ -35,10 +35,10 @@ export class NoticeService {
   }
 
   formatNotice(noticePg: NoticePGDto): NoticeDto {
-    const {id, created_at, description, email, expiration_date, group_id, institution_id, name, user_id} = noticePg
+    const {id, title, created_at, description, email, expiration_date, group_id, institution_id, name, user_id} = noticePg
     
     return {
-      id, user_id, created_at, description, group_id, expiration_date,
+      id, title, user_id, created_at, description, group_id, expiration_date,
       user: {
         email, id: user_id, institution_id, name
       }

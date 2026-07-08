@@ -18,13 +18,13 @@ export class MeetRepository {
     return meet.rows[0]
   }
 
-  async createMeet(user_id: number, group_id: number, description: string, date_time: Date, location: string) {
-    const meet = await this.pool.query<MeetPGDto>(MeetQuery.CREATE, [user_id, group_id, description, date_time, location])
+  async createMeet(title: string, user_id: number, group_id: number, description: string, date_time: Date, location: string) {
+    const meet = await this.pool.query<MeetPGDto>(MeetQuery.CREATE, [title, user_id, group_id, description, date_time, location])
     return meet.rows[0]
   }
 
-  async updateMeet(id: number, description: string, date_time: Date, location: string) {
-    const meet = await this.pool.query<MeetPGDto>(MeetQuery.UPDATE, [description, date_time, location, id])
+  async updateMeet(id: number, title: string, description: string, date_time: Date, location: string) {
+    const meet = await this.pool.query<MeetPGDto>(MeetQuery.UPDATE, [title, description, date_time, location, id])
     return meet.rows[0]
   }
 

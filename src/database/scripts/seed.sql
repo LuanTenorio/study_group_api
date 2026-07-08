@@ -50,26 +50,26 @@ INSERT INTO tb_enrollment (user_id, group_id, status, role, enrolled_at) VALUES
 (5, 4, 'active', 'member', '2026-04-16'),
 (6, 4, 'pending', 'member', '2026-04-18');
 
-INSERT INTO tb_meeting (user_id, group_id, date_time, description, location) VALUES
-(1, 1, '2026-07-20 14:00:00', 'Revisao de joins, subconsultas e indices', 'Sala BSA N-102'),
-(2, 1, '2026-07-27 14:00:00', 'Modelagem e normalizacao do projeto final', 'Laboratorio CIC 08'),
-(3, 2, '2026-07-21 10:00:00', 'Discussao sobre transformers e aplicacoes', 'Google Meet'),
-(3, 2, '2026-07-28 10:00:00', 'Apresentacao de artigos recentes', 'Google Meet'),
-(6, 3, '2026-07-22 16:30:00', 'Planejamento do sprint e divisao de tarefas', 'Biblioteca Central'),
-(4, 4, '2026-07-23 18:00:00', 'Exercicios de roteamento e subnetting', 'Laboratorio de Redes');
+INSERT INTO tb_meeting (user_id, group_id, title, date_time, description, location) VALUES
+(1, 1, 'Revisao', '2026-07-20 14:00:00', 'Revisao de joins, subconsultas e indices', 'Sala BSA N-102'),
+(2, 1, 'Projeto final', '2026-07-27 14:00:00', 'Modelagem e normalizacao do projeto final', 'Laboratorio CIC 08'),
+(3, 2, 'Discussao', '2026-07-21 10:00:00', 'Discussao sobre transformers e aplicacoes', 'Google Meet'),
+(3, 2, 'Apresentacao', '2026-07-28 10:00:00', 'Apresentacao de artigos recentes', 'Google Meet'),
+(6, 3, 'Sprint', '2026-07-22 16:30:00', 'Planejamento do sprint e divisao de tarefas', 'Biblioteca Central'),
+(4, 4, 'Exercicios', '2026-07-23 18:00:00', 'Exercicios de roteamento e subnetting', 'Laboratorio de Redes');
 
-INSERT INTO tb_material (user_id, group_id, file_size, file_content, file_type, uploaded_at, description) VALUES
-(1, 1, 2048, decode('255044462d53514c2d4d4f434b', 'hex'), 'application/pdf', '2026-06-10 09:30:00', 'Resumo de SQL avancado em PDF'),
-(2, 1, 1024, decode('4353562d45584552434943494f53', 'hex'), 'text/csv', '2026-06-11 15:10:00', 'Base de exercicios para consultas'),
-(3, 2, 4096, decode('255044462d49412d41525449474f', 'hex'), 'application/pdf', '2026-06-12 11:45:00', 'Artigo introdutorio sobre transformers'),
-(6, 3, 1536, decode('4d41524b444f574e2d535052494e54', 'hex'), 'text/markdown', '2026-06-13 17:20:00', 'Backlog do sprint em markdown'),
-(4, 4, 3072, decode('504e472d4449414752414d412d5245444553', 'hex'), 'image/png', '2026-06-14 19:00:00', 'Diagrama de topologia de rede');
+INSERT INTO tb_material (user_id, title, group_id, file_size, file_content, file_type, uploaded_at, description) VALUES
+(1, 'Resumo SQL', 1, 2048, decode('255044462d53514c2d4d4f434b', 'hex'), 'application/pdf', '2026-06-10 09:30:00', 'Resumo de SQL avancado em PDF'),
+(2, 'Exercicios', 1, 1024, decode('4353562d45584552434943494f53', 'hex'), 'text/csv', '2026-06-11 15:10:00', 'Base de exercicios para consultas'),
+(3, 'Artigo transformers', 2, 4096, decode('255044462d49412d41525449474f', 'hex'), 'application/pdf', '2026-06-12 11:45:00', 'Artigo introdutorio sobre transformers'),
+(6, 'Backlog', 3, 1536, decode('4d41524b444f574e2d535052494e54', 'hex'), 'text/markdown', '2026-06-13 17:20:00', 'Backlog do sprint em markdown'),
+(4, 'Diagrama Redes', 4, 3072, decode('504e472d4449414752414d412d5245444553', 'hex'), 'image/png', '2026-06-14 19:00:00', 'Diagrama de topologia de rede');
 
-INSERT INTO tb_notice (user_id, group_id, expiration_date, created_at, description) VALUES
-(1, 1, '2026-06-21 23:59:00', '2026-06-15 08:00:00', 'Leiam o capitulo sobre otimizacao antes do encontro.'),
-(3, 2, '2026-06-22 23:59:00', '2026-06-15 09:15:00', 'Cada participante deve trazer uma pergunta sobre o artigo.'),
-(2, 3, '2026-06-23 23:59:00', '2026-06-16 12:30:00', 'Atualizem suas tarefas no quadro antes da reuniao.'),
-(4, 4, '2026-06-24 23:59:00', '2026-06-16 18:40:00', 'Instalem o simulador de redes para a pratica.');
+INSERT INTO tb_notice (user_id, group_id, title, expiration_date, created_at, description) VALUES
+(1, 1, 'Tarefa antes da aula', '2026-06-21 23:59:00', '2026-06-15 08:00:00', 'Leiam o capitulo sobre otimizacao antes do encontro.'),
+(3, 2, 'Perguntas sobre artigo', '2026-06-22 23:59:00', '2026-06-15 09:15:00', 'Cada participante deve trazer uma pergunta sobre o artigo.'),
+(2, 3, 'Para antes da reuniao', '2026-06-23 23:59:00', '2026-06-16 12:30:00', 'Atualizem suas tarefas no quadro antes da reuniao.'),
+(4, 4, 'Preparacao para aula do dia 23', '2026-06-24 23:59:00', '2026-06-16 18:40:00', 'Instalem o simulador de redes para a pratica.');
 
 INSERT INTO tb_comment (user_id, group_id, created_at, description) VALUES
 (2, 1, '2026-06-15 10:05:00', 'Preparei algumas consultas com GROUP BY para treinarmos.'),

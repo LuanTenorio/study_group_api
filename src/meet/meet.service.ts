@@ -18,13 +18,13 @@ export class MeetService {
     return this.formatMeet(meet)
   }
 
-  async createMeet(user_id: number, group_id: number, description: string, date_time: Date, location: string){
-    const meet = await this.meetRepository.createMeet(user_id, group_id, description, date_time, location)
+  async createMeet(title: string, user_id: number, group_id: number, description: string, date_time: Date, location: string){
+    const meet = await this.meetRepository.createMeet(title, user_id, group_id, description, date_time, location)
     return this.formatMeet(meet)
   }
 
-  async updateMeet(id: number, description: string, date_time: Date, location: string){
-    const meet = await this.meetRepository.updateMeet(id, description, date_time, location)
+  async updateMeet(id: number, title: string, description: string, date_time: Date, location: string){
+    const meet = await this.meetRepository.updateMeet(id, title, description, date_time, location)
     return this.formatMeet(meet)
   }
 
@@ -34,9 +34,9 @@ export class MeetService {
   }
 
   formatMeet(meetPg: MeetPGDto): MeetDto {
-    const {id, description, group_id, date_time,email, location, institution_id, name, user_id} = meetPg
+    const {id, title, description, group_id, date_time,email, location, institution_id, name, user_id} = meetPg
     return {
-      id, description, group_id, date_time, location, user_id,
+      id, title, description, group_id, date_time, location, user_id,
       user: {
         email, id: user_id, institution_id, name
       }

@@ -19,13 +19,14 @@ export class MaterialService {
     return material ? this.formatMaterial(material) : null
   }
 
-  async createMaterial(user_id: number,group_id: number,file: any,description: string,) {
-    const material = await this.materialRepository.createMaterial(user_id,group_id,description,file.buffer,file.size,file.mimetype,);
+  async createMaterial(title: string, user_id: number,group_id: number,file: any,description: string,) {
+    const material = await this.materialRepository.createMaterial(title,user_id,group_id,description,file.buffer,file.size,file.mimetype,);
     return material ? this.formatMaterial(material) : null;
   }
 
-  async updateMaterial(id: number,description: string,file?: any,) {
+  async updateMaterial(id: number, title: string, description: string,file?: any,) {
   const material = await this.materialRepository.updateMaterial(
+    title,
     file.size,
     file.buffer,
     file.mimetype,
@@ -45,10 +46,10 @@ export class MaterialService {
   }
 
   formatMaterial(materialPg: MaterialPGDto): MaterialDto {
-    const {id, description, email, file_content, file_size, file_type, group_id, institution_id, uploaded_at, name, user_id} = materialPg
+    const {id, title, description, email, file_content, file_size, file_type, group_id, institution_id, uploaded_at, name, user_id} = materialPg
     
     return {
-      id, user_id, description, group_id, file_content, file_size, file_type, uploaded_at,
+      id, title, user_id, description, group_id, file_content, file_size, file_type, uploaded_at,
       user: {
         email, id: user_id, institution_id, name
       }

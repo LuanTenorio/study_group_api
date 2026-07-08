@@ -2,6 +2,7 @@ import { UserDto } from "src/user/dto/user.dto";
 
 export class MaterialPGDto implements Omit<UserDto, "id"> {
     id: number
+    title: string
     user_id: number
     group_id: number
     file_size: number

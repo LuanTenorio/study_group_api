@@ -22,12 +22,12 @@ export class MeetController {
 
   @Post()
   async createMeet(@Body() data: any){
-    return this.serviceService.createMeet(data.user_id, data.group_id, data.description, data.date_time, data.location)
+    return this.serviceService.createMeet(data.title, data.user_id, data.group_id, data.description, data.date_time, data.location)
   }
 
   @Patch(":id")
   async updateMeet(@Param("id", ParseIntPipe) id: number, @Body() data: any){
-    return this.serviceService.updateMeet(id, data.description, data.date_time, data.location)
+    return this.serviceService.updateMeet(id, data.title, data.description, data.date_time, data.location)
   }
 
 }

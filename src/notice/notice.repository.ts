@@ -19,13 +19,13 @@ export class NoticeRepository {
     return notice.rows[0]
   }
 
-  async createNotice(user_id: number, group_id: number, description: string, expiration_date: Date) {
-    const notice = await this.pool.query<NoticePGDto>(NoticeQuery.CREATE, [user_id, group_id, description, expiration_date])
+  async createNotice(title: string, user_id: number, group_id: number, description: string, expiration_date: Date) {
+    const notice = await this.pool.query<NoticePGDto>(NoticeQuery.CREATE, [title, user_id, group_id, description, expiration_date])
     return notice.rows[0]
   }
 
-  async updateNotice(id: number, description: string, expiration_date: Date) {
-    const notice = await this.pool.query<NoticePGDto>(NoticeQuery.UPDATE, [description, expiration_date, id])
+  async updateNotice(title: string, id: number, description: string, expiration_date: Date) {
+    const notice = await this.pool.query<NoticePGDto>(NoticeQuery.UPDATE, [title, description, expiration_date, id])
     return notice.rows[0]
   }
 
