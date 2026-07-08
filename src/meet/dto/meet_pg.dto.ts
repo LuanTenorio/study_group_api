@@ -1,6 +1,6 @@
 import { UserDto } from "src/user/dto/user.dto";
 
-export class MeetDto {
+export class MeetPGDto implements Omit<UserDto, "id">{
     id: number
     user_id: number
     group_id: number
@@ -8,5 +8,8 @@ export class MeetDto {
     description: string
     location: string
 
-    user: UserDto
+    // User
+    name: string;
+    email: string;
+    institution_id: number;
 }

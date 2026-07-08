@@ -19,6 +19,7 @@ CREATE TABLE tb_group
 CREATE TABLE tb_meeting 
 ( 
  id SERIAL PRIMARY KEY,  
+ user_id INT,
  group_id INT,  
  date_time TIMESTAMP,  
  description VARCHAR(255),  
@@ -88,6 +89,7 @@ CREATE TABLE tb_group_area
 ); 
 
 ALTER TABLE tb_user ADD FOREIGN KEY(institution_id) REFERENCES tb_institution (id);
+ALTER TABLE tb_meeting ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
 ALTER TABLE tb_enrollment ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
 ALTER TABLE tb_material ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);
 ALTER TABLE tb_notice ADD FOREIGN KEY(user_id) REFERENCES tb_user (id);

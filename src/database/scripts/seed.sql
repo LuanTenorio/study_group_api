@@ -50,13 +50,13 @@ INSERT INTO tb_enrollment (user_id, group_id, status, role, enrolled_at) VALUES
 (5, 4, 'active', 'member', '2026-04-16'),
 (6, 4, 'pending', 'member', '2026-04-18');
 
-INSERT INTO tb_meeting (group_id, date_time, description, location) VALUES
-(1, '2026-07-20 14:00:00', 'Revisao de joins, subconsultas e indices', 'Sala BSA N-102'),
-(1, '2026-07-27 14:00:00', 'Modelagem e normalizacao do projeto final', 'Laboratorio CIC 08'),
-(2, '2026-07-21 10:00:00', 'Discussao sobre transformers e aplicacoes', 'Google Meet'),
-(2, '2026-07-28 10:00:00', 'Apresentacao de artigos recentes', 'Google Meet'),
-(3, '2026-07-22 16:30:00', 'Planejamento do sprint e divisao de tarefas', 'Biblioteca Central'),
-(4, '2026-07-23 18:00:00', 'Exercicios de roteamento e subnetting', 'Laboratorio de Redes');
+INSERT INTO tb_meeting (user_id, group_id, date_time, description, location) VALUES
+(1, 1, '2026-07-20 14:00:00', 'Revisao de joins, subconsultas e indices', 'Sala BSA N-102'),
+(2, 1, '2026-07-27 14:00:00', 'Modelagem e normalizacao do projeto final', 'Laboratorio CIC 08'),
+(3, 2, '2026-07-21 10:00:00', 'Discussao sobre transformers e aplicacoes', 'Google Meet'),
+(3, 2, '2026-07-28 10:00:00', 'Apresentacao de artigos recentes', 'Google Meet'),
+(6, 3, '2026-07-22 16:30:00', 'Planejamento do sprint e divisao de tarefas', 'Biblioteca Central'),
+(4, 4, '2026-07-23 18:00:00', 'Exercicios de roteamento e subnetting', 'Laboratorio de Redes');
 
 INSERT INTO tb_material (user_id, group_id, file_size, file_content, file_type, uploaded_at, description) VALUES
 (1, 1, 2048, decode('255044462d53514c2d4d4f434b', 'hex'), 'application/pdf', '2026-06-10 09:30:00', 'Resumo de SQL avancado em PDF'),
