@@ -1,15 +1,13 @@
 import { UserDto } from "src/user/dto/user.dto";
 
-export class MaterialPGDto implements Omit<UserDto, "id"> {
+export class MeetPGDto implements Omit<UserDto, "id">{
     id: number
     title: string
     user_id: number
     group_id: number
-    file_size: number
-    file_content: ArrayBuffer
-    file_type: string
-    uploaded_at: Date  
+    date_time: Date
     description: string
+    location: string
 
     // User
     name: string;

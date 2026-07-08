@@ -2,6 +2,7 @@ import { UserDto } from "src/user/dto/user.dto";
 
 export class NoticePGDto implements Omit<UserDto, "id"> {
     id: number
+    title: string
     user_id: number
     group_id: number
     created_at: Date
