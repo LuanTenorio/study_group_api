@@ -2,7 +2,8 @@ INSERT INTO tb_institution (name, state, acronym) VALUES
 ('Universidade de Brasilia', 'DF', 'UnB'),
 ('Universidade de Sao Paulo', 'SP', 'USP'),
 ('Universidade Federal de Minas Gerais', 'MG', 'UFMG'),
-('Universidade Federal do Rio de Janeiro', 'RJ', 'UFRJ');
+('Universidade Federal do Rio de Janeiro', 'RJ', 'UFRJ'),
+('Universidade Federal do Amazonas', 'AM', 'UFAM');
 
 INSERT INTO tb_knowledge_area (name, icon) VALUES
 ('Banco de Dados', 'pi-database'),
@@ -16,17 +17,18 @@ INSERT INTO tb_knowledge_area (name, icon) VALUES
 
 INSERT INTO tb_user (institution_id, name, email, password_hash) VALUES
 (1, 'Ana Clara Martins', 'ana.martins@unb.br', '$2b$10$4FD1DOdEqKq6uXkMQHUGzuO3Cu2bILxuWAn3leAPfhnK7Kwed8Tga'),
-(1, 'Bruno Ferreira', 'bruno.ferreira@unb.br', '$2b$10$mockhashbruno'),
-(2, 'Carla Souza', 'carla.souza@usp.br', '$2b$10$mockhashcarla'),
-(3, 'Diego Almeida', 'diego.almeida@ufmg.br', '$2b$10$mockhashdiego'),
-(4, 'Elisa Ribeiro', 'elisa.ribeiro@ufrj.br', '$2b$10$mockhashelisa'),
-(1, 'Felipe Nunes', 'felipe.nunes@unb.br', '$2b$10$mockhashfelipe');
+(1, 'Bruno Ferreira', 'bruno.ferreira@unb.br', '$2b$10$41hWkNRg./RFRzT4p4wNMOLSaVorbeSOvdGOuEBI3YhIItDsuk.1K'),
+(2, 'Carla Souza', 'carla.souza@usp.br', '$2b$10$R1Qcw6CwWsQZkxawCsAmu.PsEy7ghwet1YH1A2yiOAYdtzgp06U6m'),
+(3, 'Diego Almeida', 'diego.almeida@ufmg.br', '$2b$10$DkiajfHZMtHxM0XV9HHgNu2uUgQ.C/euooIeNMK3TBevtATS2s9ji'),
+(4, 'Elisa Ribeiro', 'elisa.ribeiro@ufrj.br', '$2b$10$jlxPPDpwhLq2Pnt8o7x9N./y3kwU79g6meD73v50zKyAeJqBaA19u'),
+(1, 'Felipe Nunes', 'felipe.nunes@unb.br', '$2b$10$qXV10aFWKV.Fm5hR62fhtOi4OUmoGmGKe.zAlOSU/sGey0E4GoHgu');
 
 INSERT INTO tb_group (name) VALUES
 ('Estudos de SQL Avancado'),
 ('Leitura de Artigos em IA'),
 ('Projeto de Engenharia de Software'),
-('Monitoria de Redes');
+('Monitoria de Redes'),
+('Leitura de Artigos em Redes');
 
 INSERT INTO tb_group_area (group_id, area_id) VALUES
 (1, 1),
@@ -36,7 +38,8 @@ INSERT INTO tb_group_area (group_id, area_id) VALUES
 (3, 3),
 (3, 1),
 (4, 4),
-(4, 6);
+(4, 6),
+(5, 4);
 
 INSERT INTO tb_enrollment (user_id, group_id, status, role, enrolled_at) VALUES
 (1, 1, 'active', 'owner', '2026-03-04'),
