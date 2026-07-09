@@ -35,7 +35,6 @@ BEGIN
         NOW(), 
         'Olá, Seja bem vindo ao grupo de estudos de ' || p_nome_grupo 
     );
-    COMMIT;
 END;
 $$;
 
