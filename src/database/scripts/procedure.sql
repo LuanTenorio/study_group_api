@@ -26,10 +26,11 @@ BEGIN
     INSERT INTO tb_enrollment (user_id, group_id, status, role, enrolled_at) 
     VALUES (p_user_id, v_group_id, 'active', 'owner', NOW());
 
-    INSERT INTO tb_notice (user_id, group_id, expiration_date, created_at, description) 
+    INSERT INTO tb_notice (user_id, group_id, title, expiration_date, created_at, description) 
     VALUES (
         p_user_id, 
         v_group_id, 
+        'Boas vindas!!',
         NOW() + INTERVAL '1 month',
         NOW(), 
         'Olá, Seja bem vindo ao grupo de estudos de ' || p_nome_grupo 
