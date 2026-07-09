@@ -54,5 +54,10 @@ export class GroupController {
     await this.groupService.enroll(userId, groupId);
     return { success: true };
   }
+  
+  @Delete(':id/enroll')
+  async unenroll(@Param('id', ParseIntPipe) groupId: number, @UserId() userId: number) {
+    return this.groupService.unenroll(userId, groupId);
+  }
 
 }

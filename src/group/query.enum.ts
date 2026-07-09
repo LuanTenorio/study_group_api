@@ -19,4 +19,5 @@ export enum GroupQuery{
     FIND_PREVIEW_BY_ID = `SELECT * FROM group_feed_card WHERE id = $1;`,
 
     ENROLL = `CALL enroll_user_group($1, $2);`,
+    UNENROLL = "DELETE FROM tb_enrollment e WHERE e.user_id = $1 AND e.group_id = $2"
 }

@@ -122,6 +122,15 @@ export class GroupService {
     }
   }
 
+  async unenroll(userId: number, groupId: number){
+    const isOwner = await this.isOwner(groupId, userId)
+
+    if(isOwner)
+      throw new ConflictException("Administrators cannot leave the group")
+    
+    return this.groupRepository.unenroll(userId, groupId);
+  }
+
   private formatMeetingDate(dateString: string | null): string {
     if (!dateString) return 'Sem encontros agendados';
 

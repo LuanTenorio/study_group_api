@@ -68,4 +68,8 @@ export class GroupRepository {
     await this.pool.query(GroupQuery.ENROLL, [userId, groupId]);
   }
 
+  async unenroll(userId: number, groupId: number) {
+    return this.pool.query(GroupQuery.UNENROLL, [userId, groupId]);
+  }
+
 }
